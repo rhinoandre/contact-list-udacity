@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function ShowingContacts({ contactsLength, filteredContactsLength, onClearQuery }) {
   if (contactsLength === filteredContactsLength) {
@@ -17,3 +18,9 @@ export default function ShowingContacts({ contactsLength, filteredContactsLength
     </div>
   );
 }
+
+ShowingContacts.propTypes = {
+  contactsLength: PropTypes.number.isRequired,
+  filteredContactsLength: PropTypes.number.isRequired,
+  onClearQuery: PropTypes.func.isRequired
+};
