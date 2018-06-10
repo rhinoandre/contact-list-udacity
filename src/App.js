@@ -3,8 +3,8 @@ import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 
 import * as ContactAPI from './utils/ContactsAPI';
-import ListContacts from './ListContacts';
-import PageTop from './PageTop';
+import ListContacts from './ListContacts/';
+import PageTop from './PageTop/';
 import ShowingContacts from './ShowingContacts';
 
 export default class App extends Component {
