@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import ContactDisplay from './ContactDisplay';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
+
+import ContactDisplay from './ContactDisplay';
+import ShowingContacts from './ShowingContacts';
 
 export default class ListContacts extends Component {
   static propTypes = {
@@ -21,10 +23,18 @@ export default class ListContacts extends Component {
   }
 
   filterContacts(query, contacts) {
-    const regex = new RegExp(escapeRegExp(query), 'i');
-    return contacts.filter(contact => regex.test(contact.name));
+    if (query) {
+      const regex = new RegExp(escapeRegExp(query), 'i');
+      return contacts.filter(contact => regex.test(contact.name));
+    } else {
+      return contacts;
+    }
   }
   
+  clearQuery = () => {
+    this.updateQuery('');
+  };
+
   render() {
     const { contacts, onRemoveContact } = this.props;
     const { query } = this.state;
@@ -43,6 +53,9 @@ export default class ListContacts extends Component {
             onChange={(event) => this.updateQuery(event.target.value)}
           />
         </div>
+
+        <ShowingContacts onClearQuery={this.clearQuery} contactsLength={contacts.length} filteredContactsLength={filteredContacts.length} />
+
         <ol className='contact-list'>
           {
             filteredContacts.map(
